@@ -1,0 +1,19 @@
+version: '3'
+services: 
+  db: 
+    image: mongo:3.4
+  
+  backend:
+    image: node:8.1  # Corrigido de "nome" para "node" e adicionado a versão correta
+    volumes:
+      - ./backend:/backend
+    ports:
+      - "3000:3000"
+    command: bash -c "cd /backend && npm install && node app"  # Ajustado o comando e o caminho do arquivo
+    
+  frontend:
+    image: nginx:1.13  # Corrigido "ninx" para "nginx"
+    volumes:
+      - ./frontend:/usr/share/nginx/html/
+    ports:
+      - 80:80
